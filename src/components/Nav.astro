@@ -6,7 +6,6 @@ import ThemeToggle from './ThemeToggle.astro';
 /** Main menu items */
 const textLinks: { label: string; href: string }[] = [
 	{ label: 'Home', href: '/' },
-	{ label: 'Projects', href: '/projects/' },
 	{ label: 'Blog', href: '/blog/' },
 	{ label: 'CV', href: '/cv/' },
 ];
@@ -245,7 +244,8 @@ const isCurrentPage = (href: string) => {
 			display: grid;
 			grid-template-columns: 1fr auto 1fr;
 			align-items: center;
-			padding: 2.5rem 5rem;
+			/* Match .wrapper so the logo lines up with page content. */
+			padding: 2.5rem max(1.5rem, calc((100% - 83rem) / 2 + 1.5rem));
 			gap: 1rem;
 		}
 
@@ -303,7 +303,7 @@ const isCurrentPage = (href: string) => {
 		.menu-footer {
 			--icon-padding: 0.375rem;
 			min-width: 100%;
-			justify-content: center;
+			justify-content: flex-end;
 			align-items: center;
 			padding: 0;
 			background-color: transparent;

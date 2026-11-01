@@ -1,249 +1,211 @@
 ---
-import { getCollection } from 'astro:content';
-// Component Imports
-import CallToAction from '../components/CallToAction.astro';
-// Page section components
-import ContactCTA from '../components/ContactCTA.astro';
-import Grid from '../components/Grid.astro';
-import Hero from '../components/Hero.astro';
 import Icon from '../components/Icon.astro';
-import Pill from '../components/Pill.astro';
-import PortfolioPreview from '../components/PortfolioPreview.astro';
-import Skills from '../components/Skills.astro';
-// Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { categories, projects } from '../data/projects';
 
-// Content Fetching: List four most recent work projects
-const projects = (await getCollection('work'))
-	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
-	.slice(0, 4);
-
-// Full Astro Component Syntax:
-// https://docs.astro.build/basics/astro-components/
+const groups = categories
+	.map((category) => ({ ...category, items: projects.filter((p) => p.category === category.id) }))
+	.filter((group) => group.items.length > 0);
 ---
 
-<BaseLayout title='Home - Sam Kerr'>
-	<div class="stack gap-20 lg:gap-48">
-		<div class="wrapper stack gap-8 lg:gap-20">
-			<header class="hero">
-				<Hero
-					title="Sam Kerr"
-					tagline="Senior Software Engineer"
-					align="start"
-				>
-					<!-- <div class="roles">
-						<Pill><Icon icon="code" size="1.33em" /> Developer</Pill>
-						<Pill><Icon icon="microphone-stage" size="1.33em" /> Speaker</Pill>
-						<Pill><Icon icon="pencil-line" size="1.33em" /> Writer</Pill>
-					</div> -->
-				</Hero>
-
-				<img
-					alt="Professional picture of Sam Kerr"
-					width="480"
-					height="620"
-					src="/assets/sam-ghibli-cropped.png"
-				/>
-			</header>
-
-			<!-- <Skills /> -->
-		</div>
-<!-- 
-		<main class="wrapper stack gap-20 lg:gap-48">
-			<section class="section with-background with-cta">
-				<header class="section-header stack gap-2 lg:gap-4">
-					<h3>Selected Work</h3>
-					<p>Take a look below at some of my featured work for clients from the past few years.</p>
-				</header>
-
-				<div class="gallery">
-					<Grid variant="offset">
-						{
-							projects.map((project) => (
+<BaseLayout title="Sam Kerr" description="Sam Kerr, Senior Software Engineer. Side projects and open source work.">
+	<main class="wrapper stack gap-10 lg:gap-20">
+		<section class="stack gap-10">
+			<h2 class="section-title">Projects</h2>
+			{
+				groups.map((group) => (
+					<div class="group stack gap-4">
+						<header class="group-header">
+							<h3 class="group-title">{group.label}</h3>
+						</header>
+						<ul class="projects">
+							{group.items.map((project) => (
 								<li>
-									<PortfolioPreview project={project} />
+									<article class="card">
+										<div class="card-header">
+											<h4>
+												<a class="card-link" href={project.url} target="_blank" rel="noopener noreferrer">
+													{project.name}
+												</a>
+											</h4>
+											<Icon icon="arrow-right" size="1.2em" />
+										</div>
+										<p>{project.description}</p>
+										{project.liveUrl && (
+											<a class="live-link" href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+												Visit site ↗
+											</a>
+										)}
+										<div class="tools">
+											<ul class="tags">
+												{project.tools.map((tool) => (
+													<li>{tool}</li>
+												))}
+											</ul>
+										</div>
+									</article>
 								</li>
-							))
-						}
-					</Grid>
-				</div>
-
-				<div class="cta">
-					<CallToAction href="/work/">
-						View All
-						<Icon icon="arrow-right" size="1.2em" />
-					</CallToAction>
-				</div>
-			</section>
-
-			<section class="section with-background bg-variant">
-				<header class="section-header stack gap-2 lg:gap-4">
-					<h3>Mentions</h3>
-					<p>
-						I have been fortunate enough to receive praise for my work in several publications. Take
-						a look below to learn more.
-					</p>
-				</header>
-
-				<div class="gallery">
-					<Grid variant="small">
-						{
-							['Medium', 'BuzzFeed', 'The Next Web', 'awwwards.', 'TechCrunch'].map((brand) => (
-								<li class="mention-card">
-									<p>{brand}</p>
-								</li>
-							))
-						}
-					</Grid>
-				</div>
-			</section>
-		</main> -->
-
-		<!-- <ContactCTA /> -->
-	</div>
+							))}
+						</ul>
+					</div>
+				))
+			}
+			<p class="more">
+				More on <a href="https://github.com/SamKerr" target="_blank" rel="noopener noreferrer">GitHub</a>.
+			</p>
+		</section>
+	</main>
 </BaseLayout>
 
 <style>
-	.hero {
+	.section-title {
+		font-size: var(--text-2xl);
+		color: var(--gray-0);
+	}
+
+	.group-header {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 0.25rem 1rem;
+		padding-bottom: 0.75rem;
+		border-bottom: 1px solid var(--gray-800);
+	}
+
+	.group-title {
+		font-size: var(--text-xl);
+		font-family: var(--font-brand);
+		color: var(--gray-0);
+	}
+
+	.projects {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(min(19rem, 100%), 1fr));
+		gap: 1.5rem;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.projects li {
+		display: flex;
+	}
+
+	.card {
+		position: relative;
 		display: flex;
 		flex-direction: column;
-		align-items: center;
-		gap: 2rem;
+		gap: 0.75rem;
+		width: 100%;
+		padding: 1.5rem;
+		background: var(--gradient-subtle);
+		border: 1px solid var(--gray-800);
+		border-radius: 1rem;
+		box-shadow: var(--shadow-sm);
+		color: var(--gray-300);
+		text-decoration: none;
+		transition:
+			box-shadow var(--theme-transition),
+			border-color var(--theme-transition);
 	}
 
-	.roles {
-		display: none;
-	}
-
-	.hero img {
-		aspect-ratio: 5 / 4;
-		object-fit: cover;
-		object-position: top;
-		border-radius: 1.5rem;
+	.card:hover,
+	.card:focus-within {
 		box-shadow: var(--shadow-md);
+		border-color: var(--accent-regular);
 	}
 
-	@media (min-width: 50em) {
-		.hero {
-			display: grid;
-			grid-template-columns: 6fr 4fr;
-			padding-inline: 2.5rem;
-			gap: 3.75rem;
-		}
-
-		.roles {
-			margin-top: 0.5rem;
-			display: flex;
-			gap: 0.5rem;
-		}
-
-		.hero img {
-			aspect-ratio: 3 / 4;
-			border-radius: 4.5rem;
-			object-fit: cover;
-		}
+	.card-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 1rem;
+		color: var(--gray-0);
 	}
 
-	/* ====================================================== */
-
-	.section {
-		display: grid;
-		gap: 2rem;
+	h4 {
+		font-size: var(--text-lg);
+		font-family: var(--font-brand);
+		font-weight: 600;
 	}
 
-	.with-background {
-		position: relative;
+	.card p {
+		flex-grow: 1;
+		margin: 0;
 	}
 
-	.with-background::before {
-		--hero-bg: var(--bg-image-subtle-2);
+	/* Stretch the title link over the whole card so the card is clickable. */
+	.card-link {
+		color: inherit;
+		text-decoration: none;
+		outline: none;
+	}
 
+	.card-link::after {
 		content: '';
 		position: absolute;
-		pointer-events: none;
-		left: 50%;
-		width: 100vw;
-		aspect-ratio: calc(2.25 / var(--bg-scale));
-		top: 0;
-		transform: translateY(-75%) translateX(-50%);
-		background:
-			url('/assets/backgrounds/noise.png') top center/220px repeat,
-			var(--hero-bg) center center / var(--bg-gradient-size) no-repeat,
-			var(--gray-999);
-		background-blend-mode: overlay, normal, normal, normal;
-		mix-blend-mode: var(--bg-blend-mode);
-		z-index: -1;
+		inset: 0;
+		border-radius: inherit;
 	}
 
-	.with-background.bg-variant::before {
-		--hero-bg: var(--bg-image-subtle-1);
+	.live-link {
+		align-self: center;
+		position: relative;
+		z-index: 1;
+		font-size: var(--text-sm);
+		font-weight: 500;
+		color: var(--accent-dark);
+		text-decoration: 1px solid underline;
+		text-underline-offset: 0.25em;
 	}
 
-	.section-header {
-		justify-self: center;
-		text-align: center;
-		max-width: 50ch;
-		font-size: var(--text-md);
-		color: var(--gray-300);
+	.live-link:hover,
+	.live-link:focus-visible {
+		color: var(--accent-regular);
 	}
 
-	.section-header h3 {
-		font-size: var(--text-2xl);
-	}
-
-	@media (min-width: 50em) {
-		.section {
-			grid-template-columns: repeat(4, 1fr);
-			grid-template-areas: 'header header header header' 'gallery gallery gallery gallery';
-			gap: 5rem;
-		}
-
-		.section.with-cta {
-			grid-template-areas: 'header header header cta' 'gallery gallery gallery gallery';
-		}
-
-		.section-header {
-			grid-area: header;
-			font-size: var(--text-lg);
-		}
-
-		.section-header h3 {
-			font-size: var(--text-4xl);
-		}
-
-		.with-cta .section-header {
-			justify-self: flex-start;
-			text-align: left;
-		}
-
-		.gallery {
-			grid-area: gallery;
-		}
-
-		.cta {
-			grid-area: cta;
-		}
-	}
-
-	/* ====================================================== */
-
-	.mention-card {
+	.tools {
 		display: flex;
-		height: 7rem;
-		justify-content: center;
+		flex-wrap: wrap;
 		align-items: center;
-		text-align: center;
-		border: 1px solid var(--gray-800);
-		border-radius: 1.5rem;
-		color: var(--gray-300);
-		background: var(--gradient-subtle);
-		box-shadow: var(--shadow-sm);
+		gap: 0.5rem;
+		padding-top: 0.75rem;
+		border-top: 1px solid var(--gray-800);
 	}
 
-	@media (min-width: 50em) {
-		.mention-card {
-			border-radius: 1.5rem;
-			height: 9.5rem;
+	/* Tags are kept on a single row. */
+	.tags {
+		display: flex;
+		flex-wrap: nowrap;
+		gap: 0.3rem;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.tags li {
+		padding: 0.15rem 0.55rem;
+		font-size: 0.8rem;
+		white-space: nowrap;
+		color: var(--accent-text-over);
+		background-color: var(--accent-regular);
+		border-radius: 999rem;
+	}
+
+	.more {
+		text-align: center;
+		color: var(--gray-300);
+	}
+
+	/* Very narrow phones: tighten cards so tags still fit on one row. */
+	@media (max-width: 22.5em) {
+		.card {
+			padding: 1.25rem 1rem;
+		}
+
+		.tags li {
+			padding: 0.15rem 0.45rem;
+			font-size: 0.75rem;
 		}
 	}
 </style>

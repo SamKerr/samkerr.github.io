@@ -1,30 +1,50 @@
-# Astro Starter Kit: Portfolio
-
-```sh
-npm create astro@latest -- --template portfolio
+```
+                        _                                 _  _    _             _         _
+ ___   __ _  _ __ ___  | | __  ___  _ __  _ __      __ _ (_)| |_ | |__   _   _ | |__     (_)  ___
+/ __| / _` || '_ ` _ \ | |/ / / _ \| '__|| '__|    / _` || || __|| '_ \ | | | || '_ \    | | / _ \
+\__ \| (_| || | | | | ||   < |  __/| |   | |    _ | (_| || || |_ | | | || |_| || |_) | _ | || (_) |
+|___/ \__,_||_| |_| |_||_|\_\ \___||_|   |_|   (_) \__, ||_| \__||_| |_| \__,_||_.__/ (_)|_| \___/
+                                                   |___/
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/portfolio)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/portfolio)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/portfolio/devcontainer.json)
+# samkerr.github.io
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Personal site for Sam Kerr: projects, CV and blog. Built with [Astro](https://astro.build) and hosted on GitHub Pages at <https://samkerr.github.io>.
 
-![portfolio](https://user-images.githubusercontent.com/357379/210779178-a98f0fb7-6b1a-4068-894c-8e1403e26654.jpg)
+## Development
 
-## 🧞 Commands
+Run from the repo root:
 
-All commands are run from the root of the project, from a terminal:
+| Command           | Action                                      |
+| :---------------- | :------------------------------------------ |
+| `npm install`     | Install dependencies                        |
+| `npm run dev`     | Start the dev server at `localhost:4321`    |
+| `npm run build`   | Build the production site to `./dist/`      |
+| `npm run preview` | Preview the production build locally        |
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Editing content
 
-## 👀 Want to learn more?
+Most content lives in data files, not in the page markup:
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- **Projects** (home page): `src/data/projects.ts`. Each project has a `category` (see `categories` at the top of the file). Projects show in the order they appear in the array. `liveUrl` is optional.
+- **CV**: `src/data/cv.ts`. Holds the summary and the list of roles, and is kept short on purpose.
+- **Blog posts**: Markdown files in `src/content/blog/`. The frontmatter schema is in `src/content.config.ts`. Only posts with `public: true` appear on the blog list. Posts with `public: false` still get a page at `/blog/<slug>`, so anyone with the link can read them.
+- **Images and static files**: `public/assets/`, referenced as `/assets/...`.
+
+## Structure
+
+```
+src/
+  components/   UI components (Nav, Hero, Footer, …)
+  content/blog/ Blog posts (Markdown)
+  data/         Projects and CV data
+  layouts/      Base page layout
+  pages/        Routes: index, cv, blog, 404
+  styles/       Global CSS
+```
+
+`/projects` redirects to `/` (configured in `astro.config.mjs`).
+
+## Deployment
+
+Pushing to `master` triggers `.github/workflows/deploy.yml`, which builds the site with `withastro/action` and deploys it to GitHub Pages. You can also run it manually from the Actions tab.

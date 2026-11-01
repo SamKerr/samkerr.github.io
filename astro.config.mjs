@@ -3,5 +3,8 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-      site: 'https://samkerr.github.io',
+	site: 'https://samkerr.github.io',
+	redirects: {
+		'/projects': '/',
+	},
 });
