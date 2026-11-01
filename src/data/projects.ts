@@ -113,4 +113,12 @@ export const projects: Project[] = [
 		url: 'https://github.com/SamKerr/sudoku',
 		tools: ['Python', 'Pygame', 'Threading'],
 	},
+	{
+		name: 'This Website',
+		category: 'games',
+		year: 2025,
+		description: 'The site you are on, built with Astro and deployed to GitHub Pages',
+		url: 'https://github.com/SamKerr/samkerr.github.io',
+		tools: ['Astro', 'TypeScript', 'CSS'],
+	},
 ];
