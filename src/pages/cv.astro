@@ -16,7 +16,7 @@ import { education, experience, summary } from '../data/cv';
 							<p class="dates">{role.dates}</p>
 							<div class="details">
 								<h3>
-									{role.title} <span class="org">· {role.company}</span>
+									{role.title} <span class="sep">·</span> <span class="org">{role.company}</span>
 								</h3>
 								<p class="summary">{role.summary}</p>
 								<ul class="tags">
@@ -40,7 +40,7 @@ import { education, experience, summary } from '../data/cv';
 							<p class="dates">{ed.dates}</p>
 							<div class="details">
 								<h3>
-									{ed.qualification} <span class="org">· {ed.institution}</span>
+									{ed.qualification} <span class="sep">·</span> <span class="org">{ed.institution}</span>
 								</h3>
 								<p class="summary">{ed.summary}</p>
 							</div>
@@ -104,9 +104,15 @@ import { education, experience, summary } from '../data/cv';
 		color: var(--gray-0);
 	}
 
-	.org {
+	.sep {
 		font-weight: 400;
-		color: var(--gray-300);
+		color: var(--gray-400);
+	}
+
+	/* Company and university names in the accent red so they stand out. */
+	.org {
+		font-weight: 600;
+		color: var(--link-color);
 	}
 
 	.summary {
