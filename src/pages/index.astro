@@ -4,7 +4,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { categories, projects } from '../data/projects';
 
 const groups = categories
-	.map((category) => ({ ...category, items: projects.filter((p) => p.category === category.id) }))
+	.map((category) => ({
+		...category,
+		// Oldest first; projects from the same year keep their order in the data file.
+		items: projects.filter((p) => p.category === category.id).sort((a, b) => a.year - b.year),
+	}))
 	.filter((group) => group.items.length > 0);
 ---
 
@@ -46,6 +50,7 @@ const groups = categories
 													<li>{tool}</li>
 												))}
 											</ul>
+											<span class="year">{project.year}</span>
 										</div>
 									</article>
 								</li>
@@ -214,6 +219,13 @@ const groups = categories
 		gap: 0.5rem;
 		padding-top: 0.75rem;
 		border-top: 1px solid var(--gray-800);
+	}
+
+	.year {
+		margin-left: auto;
+		font-size: var(--text-sm);
+		font-variant-numeric: tabular-nums;
+		color: var(--gray-400);
 	}
 
 	/* Tags are kept on a single row. */

@@ -12,32 +12,37 @@ export interface Project {
 	category: Category;
 	description: string;
 	url: string;
+	/** Year the project was made (or started). */
+	year: number;
 	/** Optional link to a live, hosted version. */
 	liveUrl?: string;
 	/** Three main tools/technologies, most important first. */
 	tools: string[];
 }
 
-/** Public projects from https://github.com/SamKerr. Order within each category is display order. */
+/** Public projects from https://github.com/SamKerr. Shown oldest first within each category; same-year projects keep the order below. */
 export const projects: Project[] = [
-	{
-		name: 'Folio',
-		category: 'tools',
-		description: 'Crawl a site after login and save a browsable offline copy',
-		url: 'https://github.com/SamKerr/folio',
-		tools: ['Python', 'Playwright', 'BeautifulSoup'],
-	},
 	{
 		name: 'Poe',
 		category: 'tools',
+		year: 2026,
 		description: 'A web app for writing poetry',
 		url: 'https://github.com/SamKerr/poe',
 		liveUrl: 'https://poe.sam-kerr.co.uk',
 		tools: ['Java', 'Spring Boot', 'SQLite'],
 	},
 	{
+		name: 'Folio',
+		category: 'tools',
+		year: 2026,
+		description: 'Crawl a site after login and save a browsable offline copy',
+		url: 'https://github.com/SamKerr/folio',
+		tools: ['Python', 'Playwright', 'BeautifulSoup'],
+	},
+	{
 		name: 'ClipCrawler',
 		category: 'tools',
+		year: 2025,
 		description: 'Scrapes all audio sources from a provided URL',
 		url: 'https://github.com/SamKerr/clip-crawler',
 		tools: ['Python', 'aiohttp', 'BeautifulSoup'],
@@ -45,29 +50,33 @@ export const projects: Project[] = [
 	{
 		name: 'Part II Dissertation',
 		category: 'research',
+		year: 2021,
 		description:
-			'Cambridge CS dissertation (2021): transcribing videos of guitar performances into sheet music using computer vision alone',
+			'Cambridge CS dissertation: transcribing videos of guitar performances into sheet music using computer vision alone',
 		url: 'https://github.com/SamKerr/part-II-dissertation-pdf',
 		tools: ['Python', 'OpenCV', 'scikit-learn'],
 	},
 	{
 		name: 'Meta ML Accelerator',
 		category: 'research',
+		year: 2023,
 		description:
-			'Fine-tuned Llama 2 for R to Python translation and ported over 25% of the Robyn marketing-mix modelling library to Python (2023)',
+			'Fine-tuned Llama 2 for R to Python translation and ported over 25% of the Robyn marketing-mix modelling library to Python',
 		url: 'https://github.com/facebookexperimental/Robyn',
 		tools: ['Python', 'PyTorch', 'Hugging Face'],
 	},
 	{
 		name: 'Microsoft Partnership',
 		category: 'research',
-		description: 'Group project using Azure IoT devices to suggest study locations for students (2020)',
+		year: 2020,
+		description: 'Group project using Azure IoT devices to suggest study locations for students',
 		url: 'https://gp2020-sierra.github.io/about/',
 		tools: ['Azure IoT', 'Python', 'Vue'],
 	},
 	{
 		name: 'Advent of Code 2019',
 		category: 'challenges',
+		year: 2019,
 		description: '14 problems solved in Haskell',
 		url: 'https://github.com/SamKerr/advent-of-code-2019',
 		tools: ['Haskell', 'GHC', 'Functional'],
@@ -75,6 +84,7 @@ export const projects: Project[] = [
 	{
 		name: 'Advent of Code 2024',
 		category: 'challenges',
+		year: 2024,
 		description: 'All 50 problems solved in TypeScript',
 		url: 'https://github.com/SamKerr/advent-of-code-2024',
 		tools: ['TypeScript', 'Node.js'],
@@ -82,6 +92,7 @@ export const projects: Project[] = [
 	{
 		name: 'TypeScript Type Challenges',
 		category: 'challenges',
+		year: 2024,
 		description: 'My solutions to the type-challenges puzzles, solved entirely in the TypeScript type system',
 		url: 'https://github.com/SamKerr/typescript-type-challenges',
 		tools: ['TypeScript', 'Generics', 'Conditional Types'],
@@ -89,6 +100,7 @@ export const projects: Project[] = [
 	{
 		name: 'Chess',
 		category: 'games',
+		year: 2019,
 		description: 'Chess desktop app built with Pygame',
 		url: 'https://github.com/SamKerr/chess',
 		tools: ['Python', 'Pygame', 'NumPy'],
@@ -96,7 +108,8 @@ export const projects: Project[] = [
 	{
 		name: 'Sudoku',
 		category: 'games',
-		description: 'Sudoku desktop app',
+		year: 2020,
+		description: 'Sudoku desktop app built with Pygame',
 		url: 'https://github.com/SamKerr/sudoku',
 		tools: ['Python', 'Pygame', 'Threading'],
 	},
