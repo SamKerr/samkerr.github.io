@@ -118,8 +118,9 @@ const groups = categories
 			border-color var(--theme-transition);
 	}
 
+	/* :focus-visible (not :focus-within) so the outline doesn't stick after a mouse click. */
 	.card:hover,
-	.card:focus-within {
+	.card:has(:focus-visible) {
 		box-shadow: var(--shadow-md);
 		border-color: var(--accent-regular);
 	}
