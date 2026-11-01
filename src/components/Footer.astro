@@ -23,6 +23,8 @@ const currentYear = new Date().getFullYear();
 		text-align: center;
 		color: var(--gray-400);
 		font-size: var(--text-sm);
+		/* Mobile: keep clear space between the last section and the footer. */
+		padding: 4rem 1.5rem 2rem;
 	}
 
 	footer a {
@@ -42,7 +44,7 @@ const currentYear = new Date().getFullYear();
 	@media (min-width: 50em) {
 		footer {
 			flex-direction: row;
-			padding: 2.5rem 5rem;
+			padding: 5rem 5rem 2.5rem;
 		}
 	}
 </style>
