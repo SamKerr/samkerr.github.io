@@ -70,7 +70,7 @@ export const projects: Project[] = [
 		category: 'challenges',
 		description: 'Full solutions to Advent of Code 2024.',
 		url: 'https://github.com/SamKerr/advent-of-code-2024',
-		tools: ['TypeScript', 'Node.js', 'tsx'],
+		tools: ['TypeScript', 'Node.js'],
 	},
 	{
 		name: 'Advent of Code 2020',
