@@ -43,7 +43,7 @@ export const projects: Project[] = [
 		name: 'Chess on Paper',
 		category: 'apps',
 		year: 2026,
-		description: 'Print chess positions and study them by hand: print-ready diagrams and A4 sheets',
+		description: 'Print-ready chess diagrams for studying by hand',
 		url: 'https://github.com/SamKerr/chess-on-paper',
 		liveUrl: 'https://samkerr.github.io/chess-on-paper/',
 		tools: ['TypeScript', 'React', 'Vite'],
