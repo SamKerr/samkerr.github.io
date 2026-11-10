@@ -22,6 +22,8 @@
 	--accent-overlay: hsla(0, 80%, 50%, 0.25);
 	--accent-subtle-overlay: var(--accent-overlay);
 	--accent-text-over: var(--gray-999);
+	/* Icons on the page background: white would vanish in light mode. */
+	--icon-hover: var(--accent-light);
 
 	--link-color: var(--accent-regular);
 
@@ -98,6 +100,7 @@
 	--accent-overlay: hsla(0, 89%, 67%, 0.33);
 	--accent-subtle-overlay: hsla(0, 81%, 36%, 0.33);
 	--accent-text-over: var(--gray-0);
+	--icon-hover: var(--gray-0);
 
 	--link-color: var(--accent-dark);
 

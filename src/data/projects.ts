@@ -1,6 +1,6 @@
 export const categories = [
 	{ id: 'research', label: 'Research & Collaborations' },
-	{ id: 'tools', label: 'Tools' },
+	{ id: 'apps', label: 'Apps' },
 	{ id: 'challenges', label: 'Coding Challenges' },
 	{ id: 'games', label: 'Fun' },
 ] as const;
@@ -24,7 +24,7 @@ export interface Project {
 export const projects: Project[] = [
 	{
 		name: 'Poe',
-		category: 'tools',
+		category: 'apps',
 		year: 2026,
 		description: 'A web app for writing poetry',
 		url: 'https://github.com/SamKerr/poe',
@@ -33,7 +33,7 @@ export const projects: Project[] = [
 	},
 	{
 		name: 'Folio',
-		category: 'tools',
+		category: 'apps',
 		year: 2026,
 		description: 'Crawl a site after login and save a browsable offline copy',
 		url: 'https://github.com/SamKerr/folio',
@@ -41,7 +41,7 @@ export const projects: Project[] = [
 	},
 	{
 		name: 'Chess on Paper',
-		category: 'tools',
+		category: 'apps',
 		year: 2026,
 		description: 'Print chess positions and study them by hand: print-ready diagrams and A4 sheets',
 		url: 'https://github.com/SamKerr/chess-on-paper',
@@ -50,7 +50,7 @@ export const projects: Project[] = [
 	},
 	{
 		name: 'ClipCrawler',
-		category: 'tools',
+		category: 'apps',
 		year: 2025,
 		description: 'Scrapes all audio sources from a provided URL',
 		url: 'https://github.com/SamKerr/clip-crawler',
