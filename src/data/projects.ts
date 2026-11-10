@@ -40,6 +40,15 @@ export const projects: Project[] = [
 		tools: ['Python', 'Playwright', 'BeautifulSoup'],
 	},
 	{
+		name: 'Chess on Paper',
+		category: 'tools',
+		year: 2026,
+		description: 'Print chess positions and study them by hand: print-ready diagrams and A4 sheets',
+		url: 'https://github.com/SamKerr/chess-on-paper',
+		liveUrl: 'https://samkerr.github.io/chess-on-paper/',
+		tools: ['TypeScript', 'React', 'Vite'],
+	},
+	{
 		name: 'ClipCrawler',
 		category: 'tools',
 		year: 2025,
